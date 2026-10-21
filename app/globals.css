@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base global: tema escuro, rolagem suave e foco visível para navegação por teclado */
+html { scroll-behavior: smooth; color-scheme: dark; }
+body { @apply bg-ink font-sans text-snow antialiased; }
+:focus-visible { outline: 2px solid #0731d9; outline-offset: 3px; }
+
+/* Rotação contínua usada nos anéis orbitais do hero (duração via --d) */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.orbit { animation: spin-slow var(--d, 24s) linear infinite; }
+
+/* Grade estilo HUD que se dissolve nas bordas */
+.grid-hud {
+  background-image: linear-gradient(#ffffff0f 1px, transparent 1px),
+                    linear-gradient(90deg, #ffffff0f 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, #000 25%, transparent 72%);
+}
+
+/* Acessibilidade: respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .orbit { animation: none; }
+  html { scroll-behavior: auto; }
+}
